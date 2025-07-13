@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Vescovo - Ask the Bishop</title>
+</head>
+<body>
+  <h1>Vescovo</h1>
+  <p>Ask the bishop a question rooted in Catholic teaching:</p>
+  <textarea id="question" rows="4" cols="50" placeholder="Your question..."></textarea><br>
+  <button onclick="askVescovo()">Ask</button>
+  <p><strong>Bishop's response:</strong> <span id="response"></span></p>
+
+  <script>
+    async function askVescovo() {
+      const message = document.getElementById('question').value;
+      const response = await fetch('/ask', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ message })
+      });
+      const data = await response.json();
+      document.getElementById('response').innerText = data.response;
+    }
+  </script>
+</body>
+</html>
