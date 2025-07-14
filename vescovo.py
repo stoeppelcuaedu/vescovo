@@ -31,8 +31,6 @@ def ask_vescovo():
     if not user_input:
         return jsonify({"error": "No message provided"}), 400
 
-print("API Key Loaded:", openai.api_key is not None)
-
     response = openai.ChatCompletion.create(
         model="gpt-3.5-turbo",
         messages=[
